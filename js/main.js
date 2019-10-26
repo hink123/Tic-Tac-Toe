@@ -5,9 +5,14 @@ const PLAYER_O = -1;
 const EMPTY = 0;
 
 const COLORS = {
-    null: 'red',
+    null: 'white',
     '1': 'green',
     '-1': 'purple'
+};
+
+const PLAYER = {
+    '1': "Player X",
+    '-1': "Player O"
 };
 
 const WINNINGCOMBOS = [
@@ -40,13 +45,6 @@ replayBtn.addEventListener('click', init)
 
 init();
 
-//winner if add up to |3|
-// board = [
-//     [0, 0, 0],
-//     [0, 0, 0],
-//     [0, 0, 0]
-// ]
-
 // Initialize the board
 function init() {
     
@@ -69,19 +67,62 @@ function render() {
     })
     
     if (winner === null) {
-        gameMessage.textContent = `It is player ${turn} turn`;
+        gameMessage.textContent = `It is ${PLAYER[turn]} turn`;
     } else if (winner === 'T') {
         gameMessage.textContent = 'It is a tie!';
     } else {
-        gameMessage.textContent = "Someone Won"
+        gameMessage.textContent = `${PLAYER[winner]} won!`
     }
 }
 
 function playerMove(evt) {
     let sqrClicked = evt.target;
+    
+    //Checking if a div was clicked
     if (sqrClicked.tagName !== 'DIV') {
         return;
     }
+
+    //Extracting the the square's ID
+    let sqrId = sqrClicked.getAttribute('id')
     
-    console.log(sqrClicked);
+    //Checking if the square was already clicked
+    if (board[sqrId] !== null) {
+        return;
+    }
+
+    //Checking for a winner
+    if (winner !== null) {
+        return;
+    }
+    
+    //Updating the board
+    board[sqrId] = turn;
+    
+    //Check Winner
+    checkWinner();
+
+    //Change turns
+    turn = turn*-1;
+    
+    render();
+}
+
+function checkWinner() {
+    for (let i = 0; i < WINNINGCOMBOS.length; i++) {
+        var total = 0;
+        for (let y = 0; y < WINNINGCOMBOS[i].length; y++) {
+            total += board[WINNINGCOMBOS[i][y]];
+        }
+        total = Math.abs(total);
+        
+        if (total === 3) {
+            winner = turn;
+            break;
+        } 
+        
+    }
+    if (total !== 3 && !board.includes(null)) {
+        return winner = 'T';
+    }
 }
