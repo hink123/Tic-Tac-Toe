@@ -1,5 +1,7 @@
+
 * {
     box-sizing: border-box;
+    background-color: black;
   }
   
 body {
@@ -19,9 +21,35 @@ section {
   }
   
 section.container div {
-    border: 1px solid black;
+    border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Creepster', sans-serif;
+    font-size: 3rem;
+    cursor: pointer;
   }
 
 button {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    color: red;
+    font-size: 1rem;
+    border: 2px solid red;
+    font-family: 'Nosifer', sans-serif;
+    cursor: pointer;
+}
+
+button:focus {
+  outline: 0;
+}
+
+h1 {
+  font-family: 'Nosifer', sans-serif; 
+  color: red;
+}
+
+h2 {
+  font-family: 'Creepster', sans-serif;
+  color: red;
 }

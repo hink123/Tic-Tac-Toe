@@ -6,7 +6,7 @@ const EMPTY = 0;
 
 const COLORS = {
     null: 'white',
-    '1': 'green',
+    '1': 'orange',
     '-1': 'purple'
 };
 
@@ -27,7 +27,7 @@ const WINNINGCOMBOS = [
 ]
 
 /*----- app's state (variables) -----*/
-let turn, winner, board;
+let turn, winner, board, symbol;
 
 
 /*----- cached element references -----*/
@@ -98,6 +98,13 @@ function playerMove(evt) {
     
     //Updating the board
     board[sqrId] = turn;
+
+    // Adding X or Y
+    if (turn === PLAYER_X) {
+        sqrClicked.textContent = "X";
+    } else {
+        sqrClicked.textContent = "O";
+    }
     
     //Check Winner
     checkWinner();
