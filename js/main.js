@@ -2,7 +2,7 @@
 
 const PLAYER_X = 1;
 const PLAYER_O = -1;
-const EMPTY = 0;
+const WINNING_TOTAL = 3;
 
 const COLORS = {
     null: 'white',
@@ -27,7 +27,7 @@ const WINNINGCOMBOS = [
 ]
 
 /*----- app's state (variables) -----*/
-let turn, winner, board, symbol;
+let turn, winner, board;
 
 
 /*----- cached element references -----*/
@@ -123,13 +123,13 @@ function checkWinner() {
         }
         total = Math.abs(total);
         
-        if (total === 3) {
+        if (total === WINNING_TOTAL) {
             winner = turn;
             break;
         } 
         
     }
-    if (total !== 3 && !board.includes(null)) {
+    if (total !== WINNING_TOTAL && !board.includes(null)) {
         return winner = 'T';
     }
 }
